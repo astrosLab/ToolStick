@@ -1,19 +1,19 @@
-#include "M5StickCPlus2.h"
-#include "menu.h"
+#include "system.h"
 
-Menu menu;
+System* sys;
 
 void setup() {
-    auto cfg = M5.config();
-    M5.begin(cfg);
-    Serial.begin(115200);
-
-    menu.setup();
-    menu.addCategory("Wireless");
-    menu.addCategory("Tools");
+	sys = new System();
+	Serial.begin(155200);
+	Serial.println("Main started");
 }
 
 void loop() {
-    menu.update();
+    if (sys) {
+		Serial.println("Sys updated");
+		sys->update();
+	} else {
+		Serial.println("Sys not detected");
+	}
 }
 

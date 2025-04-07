@@ -10,13 +10,13 @@ ToolStick is a toolbox-like firmware for the M5StickC Plus 2 that's made for pro
 
 **Tools**
 - 🔧 WiFi AP Control Panel and More
-- 🔧 Bluetooth (Mouse and Media Controller)
-- 🔧 Digital Level (Gyroscope)
-- 🔧 Digital Tape Measure (Accelerometer)
-- 🔧 Compass (Magnetometer)
+- 🔧 Bluetooth (Media Controller)
+- 🔧 Digital Level
+- 🔧 Compass
 - 🔧 Stop Watch
 - 🔧 Timer
 - 🔧 Real Time Clock
+- 🔧 IR Remote
 
 **Games/Fun**
 - 🔧 Clicker Game

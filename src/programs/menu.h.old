@@ -1,5 +1,5 @@
-#ifndef __MENU_H__
-#define __MENU_H__
+#ifndef MENU_H
+#define MENU_H
 
 #include <string>
 #include <vector>
@@ -51,4 +51,4 @@ private:
     int width, height;
 };
 
-#endif
+#endif // MENU_H 
