@@ -14,8 +14,8 @@ public:
 
 	void update();
 
-	void startProgram(std::string name);
-	void toggleProgram(std::string name, bool state);
+	void startApplication(std::string name);
+	void toggleService(std::string name, bool state);
 private:
 	struct Service {
 		std::string name;

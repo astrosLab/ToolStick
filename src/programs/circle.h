@@ -3,6 +3,7 @@
 
 #include "M5StickCPlus2.h"
 #include "program.h"
+#include "../system.h"
 
 class Circle : public Program {
 public:
