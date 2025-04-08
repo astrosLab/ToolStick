@@ -32,3 +32,19 @@ void System::startApplication(std::string name) {
     }
 }
 
+void System::toggleService(std::string name, bool state) {
+    for (auto& service : services) {
+        if (service.name == name) {
+            bool wasEnabled = service.enabled;
+
+            if (state && !wasEnabled) {
+                service.program->start();
+            } else if (!state && wasEnabled) {
+                service.program->end();
+            }
+
+            service.enabled = state;
+        }
+    }
+}
+
