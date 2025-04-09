@@ -12,6 +12,8 @@ public:
 	void start() override;
 	void update() override;
 	void end() override;
+private:
+    bool service_toggled = false;
 };
 
 #endif // CIRCLE_H

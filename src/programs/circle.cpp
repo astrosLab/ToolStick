@@ -8,8 +8,10 @@ void Circle::start() {
 void Circle::update() {
     M5.update();
 
-    if (M5.BtnA.wasPressed())
-        system->startApplication(std::string("Circle"));
+    if (M5.BtnA.wasPressed()) {
+        service_toggled = !service_toggled;
+        system->toggleService(std::string("CircleService"), service_toggled);
+    }
 }
 
 void Circle::end() {}

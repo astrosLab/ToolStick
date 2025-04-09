@@ -5,6 +5,7 @@
 #include <string>
 #include "programs/program.h"
 #include "programs/circle.h"
+#include "programs/circle_service.h"
 #include "M5StickCPlus2.h"
 
 class System {
