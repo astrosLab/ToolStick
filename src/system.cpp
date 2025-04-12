@@ -5,13 +5,15 @@ System::System() {
 	M5.begin(cfg);
 	Serial.begin(155200);
 
-	applications.push_back({"Circle", "Fun", new Circle(this)});
-    services.push_back({"CircleService", "Fun", new CircleService(this)});
+	applications.push_back({"Menu", "", new Menu(this), true});
+	applications.push_back({"Circle", "Fun", new Circle(this), false});
+    services.push_back({"CircleService", "Fun", new CircleService(this), false, true});
 	
 	current_program = &applications[0];
 	current_program->program->start();
+	// startApplication("Menu");
 
-    toggleService("CircleService", false);
+    //toggleService("CircleService", false);
 }
 
 System::~System() {
@@ -56,5 +58,29 @@ void System::toggleService(std::string name, bool state) {
             service.enabled = state;
         }
     }
+}
+
+System::App System::getApplication(std::string name) {
+	for (auto& app : applications) {
+		if (app.name == name) {
+			return app;
+		}
+	}
+}
+
+System::App System::getApplications() {
+	return applications;
+}
+
+System::Service System::getService(std::string name) {
+	for (auto& service : services) {
+		if (service.name == name) {
+			return service;
+		}
+	}
+}
+
+System::Service System::getServices() {
+	return services;
 }
 
