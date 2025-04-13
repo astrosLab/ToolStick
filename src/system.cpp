@@ -3,11 +3,12 @@
 System::System() {
 	auto cfg = M5.config();
 	M5.begin(cfg);
-	Serial.begin(155200);
+	Serial.begin(115200);
 
 	applications.push_back({"Menu", "", new Menu(this), true});
 	applications.push_back({"Circle", "Fun", new Circle(this), false});
     services.push_back({"CircleService", "Fun", new CircleService(this), false, true});
+    services.push_back({"Battery", "", new Battery(this), true, true});
 	
 	current_program = &applications[0];
 	current_program->program->start();
@@ -23,13 +24,13 @@ System::~System() {
 }
 
 void System::update() {
-    current_program->program->update();	
-    
     for (auto& service : services) {
         if (service.enabled == true) {
             service.program->update();
         }
     }
+
+    current_program->program->update();	
 
     delay(1);
 }
@@ -68,7 +69,7 @@ System::App System::getApplication(std::string name) {
 	}
 }
 
-System::App System::getApplications() {
+std::vector<System::App> System::getApplications() {
 	return applications;
 }
 
@@ -80,7 +81,7 @@ System::Service System::getService(std::string name) {
 	}
 }
 
-System::Service System::getServices() {
+std::vector<System::Service> System::getServices() {
 	return services;
 }
 

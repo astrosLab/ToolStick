@@ -22,6 +22,9 @@ void Menu::start() {
 	selectedItem = 0;
 	currentMenu = "Main";
 
+    currentBatteryLevel = 0;
+    lastBatteryLevel = 0;
+
 	for (auto& app : system->getApplications()) {
 		if (app.hidden) continue;
 
@@ -60,20 +63,13 @@ int wrappedIndex(int index, int size) {
 }
 
 void Menu::drawBatteryLevel() {
-	int bat = M5.Power.getBatteryLevel();
-	int level = (M5.Display.height() / 100) * (-bat + 100);
-	
-	int r = map(bat, 100, 0, 0, 255);
-	int g = map(bat, 100, 0, 255, 0);
+	int level = map(currentBatteryLevel, 100, 0, 0, M5.Display.height());
+
+	int r = map(currentBatteryLevel, 100, 0, 0, 255);
+	int g = map(currentBatteryLevel, 100, 0, 255, 0);
 
 	M5.Display.fillRect(0, 0, 5, M5.Display.height(), TFT_DARKGREY);
-	if (bat < 15) {
-		M5.Display.fillRect(0, level, 5, M5.Display.height(), M5.Display.color888(r, g, 0));
-	} else if (bat < 30) {
-		M5.Display.fillRect(0, level, 5, M5.Display.height(), M5.Display.color888(r, g, 0));
-	} else {
-		M5.Display.fillRect(0, level, 5, M5.Display.height(), M5.Display.color888(r, g, 0));
-	}
+	M5.Display.fillRect(0, level, 5, M5.Display.height(), M5.Display.color888(r, g, 0));
 }
 
 void Menu::drawMainMenu() {
@@ -81,7 +77,6 @@ void Menu::drawMainMenu() {
 	M5.Display.setTextDatum(middle_center);
 	M5.Display.setFont(&fonts::TomThumb);
 	M5.Display.setTextSize(4);
-
 
 	selectedCategory = wrappedIndex(selectedCategory, categories.size()); 
 
@@ -128,6 +123,14 @@ void Menu::drawCurrentMenu() {
 
 void Menu::update() {
 	M5.update();
+    
+    Battery* batteryService = (Battery*)(system->getService("Battery").program);
+    lastBatteryLevel = currentBatteryLevel;
+    currentBatteryLevel = batteryService->getBatteryLevel();
+
+    if (currentBatteryLevel != lastBatteryLevel) {
+        needsRedraw = true;
+    } 
 
 	if (M5.BtnA.wasPressed()) {
 		currentMenu = categories[selectedCategory].name;	

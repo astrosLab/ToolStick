@@ -7,6 +7,7 @@
 #include "programs/circle.h"
 #include "programs/circle_service.h"
 #include "programs/menu.h"
+#include "programs/battery.h"
 #include "M5StickCPlus2.h"
 
 class System {

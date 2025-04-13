@@ -28,6 +28,8 @@ private:
 	int selectedItem;
 	std::string currentMenu;
 	bool needsRedraw;
+    int currentBatteryLevel;
+    int lastBatteryLevel; 
 };
 
 #endif // MENU_H
